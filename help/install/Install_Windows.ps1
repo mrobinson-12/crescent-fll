@@ -1,55 +1,128 @@
-$ErrorActionPreference = 'Stop'
-#Ensure stopping if errors occur. This is important for installation scripts to prevent partial installations.
-mkdir "$HOME\fll" -Force
-#makes fll directory
-Write-Host "Intstalling Git and Python via winget..."
-#Inform user of installing git and python
-winget install --id Git.Git -e 
-#Git install
-winget install --id Python.Python3 -e
-#Python install
-Write-Host "Git and Python installed succesfully" -ForegroundColor Green
-#inform user of successful install
-cd "$HOME\fll"
-#navigate to fll folder
-Write-Host "Cloning Repository..."
-#Inform user of cloning repo
-$Username = Read-Host "Enter your Github username: "
-#Get GitHub username
-$Token = Read-Host "Enter your token (Get it from your GitHub settings): "
-#Get token
-git clone "https://$($Username):$($Token)@github.com/mrobinson-12/fll-2026-missions"
-#Clone repo
-Write-Host "Repository cloned succesfully" -ForegroundColor Green
-#Report succesful cloning
-cd fll-2026
-#Navigate to cloned repo
-Write-Host "Setting up python venv and installing required dependencies..."
-#inform user of next steps - python venv and dependencies
-python -m venv .venv
-#setup python virtual envirmnt
-.venv\Scripts\Activate.ps1
-#activate python virtual envirmnt
-python -m pip install --upgrade pip
-#upgrade pip
-python -m pip install pybricks
-#install pybricks
-python -m pip install pybricksdev
-#install pybricksdev
-#$User_name = Read-Host "Enter your name: "
-#get user name imma not use bc why tf is this in the bash
-$Useremail = Read-Host "Enter your GitHub email: "
-#get user email
-git config --global user.name "$Username"
-git config --global user.email "$Useremail"
-$install_hackatime = Read-Host "Would you like to install Hackatime? (If you don't know what it is do not install) (y/n)"
-#ask user if they want to install hackatime
-if ($install_hackatime -eq "y") {
-$hackatime_api_key = Read-Host "Enter your Hackatime API key (get it from your Hackatime settings): "
-#Get hackatime api key
-irm https://raw.githubusercontent.com/hackclub/hackatime-setup/main/install.ps1 | iex; & hackatime-setup --yes -- "$hackatime_api_key"
-#stuff i dont understand but it installs hackatime
-Write-Host "Hackatime installed succesfully" -ForegroundColor Green
-}
-Write-Host "Installation complete. Open up VS Code and open the fll-2026 folder to start coding!" -ForegroundColor Green
+$ErrorActionPreference = "Stop"
 
+function Write-Success($Message) {
+    Write-Host $Message -ForegroundColor Green
+}
+
+function Write-Step($Message) {
+    Write-Host "`n$Message" -ForegroundColor Cyan
+}
+
+function Check-Command($Command) {
+    if (!(Get-Command $Command -ErrorAction SilentlyContinue)) {
+        throw "$Command was not found. Please restart PowerShell and try again."
+    }
+}
+
+# Create working directory
+Write-Step "Creating FLL workspace..."
+
+$FLLFolder = "$HOME\fll"
+
+New-Item -ItemType Directory -Path $FLLFolder -Force | Out-Null
+
+# Install required software
+Write-Step "Checking Git and Python..."
+
+if (!(Get-Command git -ErrorAction SilentlyContinue)) {
+    Write-Host "Installing Git..."
+    winget install --id Git.Git -e --accept-source-agreements --accept-package-agreements
+}
+
+if (!(Get-Command python -ErrorAction SilentlyContinue)) {
+    Write-Host "Installing Python..."
+    winget install --id Python.Python3 -e --accept-source-agreements --accept-package-agreements
+}
+
+Write-Success "Git and Python are installed."
+
+# Navigate to workspace
+Set-Location $FLLFolder
+
+# Clone repository
+Write-Step "Cloning FLL repository..."
+
+$RepoURL = "https://github.com/mrobinson-12/fll-2026-missions.git"
+
+if (Test-Path "$FLLFolder\fll-2026-missions") {
+    Write-Host "Repository already exists. Pulling latest changes..."
+    Set-Location "$FLLFolder\fll-2026-missions"
+    git pull
+}
+else {
+    git clone $RepoURL
+
+    if ($LASTEXITCODE -ne 0) {
+        throw "Failed to clone repository."
+    }
+
+    Set-Location "$FLLFolder\fll-2026-missions"
+}
+
+Write-Success "Repository ready."
+
+# Setup Python environment
+Write-Step "Setting up Python environment..."
+
+if (!(Test-Path ".venv")) {
+    python -m venv .venv
+}
+
+# Allow activation scripts
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -Force
+
+.\.venv\Scripts\Activate.ps1
+
+python -m pip install --upgrade pip
+python -m pip install pybricks pybricksdev
+
+Write-Success "Python environment configured."
+
+# Configure Git
+Write-Step "Configuring Git..."
+
+$GitUsername = Read-Host "Enter your GitHub username"
+$GitEmail = Read-Host "Enter your GitHub email"
+
+git config --global user.name $GitUsername
+git config --global user.email $GitEmail
+
+Write-Success "Git configured."
+
+# Hackatime
+Write-Step "Hackatime setup"
+
+$InstallHackatime = Read-Host "Would you like to install Hackatime? (y/n)"
+
+if ($InstallHackatime -eq "y") {
+
+    $HackatimeKey = Read-Host "Enter your Hackatime API key"
+
+    Invoke-RestMethod `
+        https://raw.githubusercontent.com/hackclub/hackatime-setup/main/install.ps1 `
+        | Invoke-Expression
+
+    hackatime-setup --yes -- $HackatimeKey
+
+    Write-Success "Hackatime installed."
+}
+
+# Finished
+Write-Host ""
+Write-Success "Installation complete!"
+
+Write-Host @"
+
+Next steps:
+1. Open VS Code
+2. Open this folder:
+
+$FLLFolder\fll-2026-missions
+
+3. Activate your environment if needed:
+
+.\.venv\Scripts\Activate.ps1
+
+Happy coding! 🤖
+
+"@
