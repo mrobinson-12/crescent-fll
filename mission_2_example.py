@@ -5,12 +5,17 @@ from base_robot import *
 
 # start all commands with br.
 def Run(br: BaseRobot):
-    br.driveForDistance(speed=100, distance=100, then=Stop.BRAKE, gyro=True)
+    br.driveForDistance(speed=544, distance=227, then=Stop.BRAKE, gyro=True)
     br.wait(1)
-    br.moveRightAttachmentMotorForDeg(degrees=90, speed=400)
-    br.turn(angle=-90, then=Stop.BRAKE, gyro=True, speed=100)
-    br.driveForDistance(speed=100, distance=600, then=Stop.BRAKE, gyro=True)
-    br.moveRightAttachmentMotorForDeg(speed=100, degrees=360)
+    br.moveRightAttachmentMotorForDeg(degrees=450, speed=400)
+    br.turn(angle=-90, then=Stop.BRAKE, gyro=True)
+    br.driveForDistance(speed=350, distance=67, then=Stop.BRAKE, gyro=True)
+    br.moveRightAttachmentMotorForDeg(degrees=90)
+    for i in range(6):
+        br.lightOn()
+        br.wait(2000)
+        br.lightOff()
+        br.wait(1000)
 
 
 # Ignore everything below this line. This just runs the mission.
