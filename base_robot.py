@@ -130,15 +130,16 @@ class BaseRobot:
 
     def beep(
         self,
+        tone=500,
+        time=100,
     ):
-        self.hub.speaker.beep()
+        self.hub.speaker.beep(tone, time)
 
     def resetHeading(
         self,
         angle=0,
     ):
         self.robot.reset_heading(angle)
-
 
 
 
