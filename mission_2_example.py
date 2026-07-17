@@ -11,11 +11,16 @@ def Run(br: BaseRobot):
     br.turn(angle=-90, then=Stop.BRAKE, gyro=True, speed=200)
     br.driveForDistance(speed=350, distance=67, then=Stop.BRAKE, gyro=True)
     br.moveRightAttachmentMotorForDeg(degrees=90, speed=400)
+<<<<<<< HEAD
     for i in range(6):
         br.lightOn(h=360, s=50, v=51)
         br.wait(2000)
         br.lightOff()
         br.wait(1000)
+=======
+    for i in range(30):
+        br.beep(tone=i*50, time=100)
+>>>>>>> 7e33bc76cc9c2e85b47129cb996ec14d4fcdda3c
 
 
 # Ignore everything below this line. This just runs the mission.
