@@ -18,7 +18,7 @@ $Username = Read-Host "Enter your Github username: "
 #Get GitHub username
 $Token = Read-Host "Enter your token (Get it from your GitHub settings): "
 #Get token
-git clone "https://$($Username):$($Token)@github.com/mrobinson-12/fll-2026"
+git clone "https://$($Username):$($Token)@github.com/mrobinson-12/fll-2026-missions"
 #Clone repo
 Write-Host "Repository cloned succesfully" -ForegroundColor Green
 #Report succesful cloning
