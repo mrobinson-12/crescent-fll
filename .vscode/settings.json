@@ -12,7 +12,7 @@
         "**/.gitignore": true,
         "**/README.md": true,
         "*.code-profile": true,
-        "base_robot*.py": true,
+        "base_robot*.py": false,
         "requirements.txt": true,
         "pyproject.toml": true,
         "colorTest.py": true,

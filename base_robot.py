@@ -140,6 +140,19 @@ class BaseRobot:
         angle=0,
     ):
         self.robot.reset_heading(angle)
+    def curve(
+        self,
+        radius,
+        angle,
+        speed,
+        then=Stop.BRAKE,
+        gyro=True,
+    ):
+        self.robot.use_gyro(gyro)
+        self.robot.settings(turn_rate=speed, turn_acceleration=500)
+        self.robot.drive(speed, 0)
+        self.robot.curve(radius, angle, then, wait)
+
 
 
 
