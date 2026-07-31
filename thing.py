@@ -4,7 +4,9 @@ from base_robot import *
 
 # start all commands with br.
 def Run(br: BaseRobot):
-    br.curve(radius=100, angle=90, speed=30)
+    voltage = br.hub.battery.voltage()
+    percent = (voltage - 6400) / (8400 - 6400) * 100
+    
 
 
 
