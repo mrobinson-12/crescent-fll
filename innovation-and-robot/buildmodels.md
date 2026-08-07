@@ -3,7 +3,7 @@
 3 - Done
 4 - Done
 5 - done
-6 - in prog
+6 - done
 7 - in prog
 12 - in prog
 13 - done
