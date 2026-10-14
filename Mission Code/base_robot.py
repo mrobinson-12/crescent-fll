@@ -1,10 +1,10 @@
-'''
+"""
 This code should not need to be run directly or edited by the students unless they want to add some functions. It is a baserobot class which includes functions, settings, and setup for the robot.
 There are variables in here that should be changed to match the configuration of your robot and you can add some extra functions if you would like.
-'''
+"""
+
 from pybricks.parameters import Color
 from pybricks.pupdevices import Motor, ColorSensor
-from pybricks.tools import wait
 
 from pybricks.parameters import (
     Port,
@@ -21,7 +21,6 @@ from pybricks.hubs import PrimeHub
 from pybricks.tools import wait
 from pybricks import version
 
-
 # THESE MUST BE CHANGED TO MATCH YOUR ROBOT'S CONFIGURATION
 TIRE_DIAMETER = 87  # mm
 AXLE_TRACK = 161  # distance between the wheels, mm
@@ -37,8 +36,12 @@ class BaseRobot:
 
     def __init__(self):
         self.hub = PrimeHub(top_side=Axis.Z, front_side=-Axis.Y)
-        self.leftDriveMotor = Motor(LEFT_DRIVE_MOTOR_PORT, Direction.COUNTERCLOCKWISE)
-        self.rightDriveMotor = Motor(RIGHT_DRIVE_MOTOR_PORT, Direction.CLOCKWISE)
+        self.leftDriveMotor = Motor(
+            LEFT_DRIVE_MOTOR_PORT, Direction.COUNTERCLOCKWISE
+        )
+        self.rightDriveMotor = Motor(
+            RIGHT_DRIVE_MOTOR_PORT, Direction.CLOCKWISE
+        )
         self.robot = DriveBase(
             self.leftDriveMotor,
             self.rightDriveMotor,
@@ -52,50 +55,39 @@ class BaseRobot:
         self.colorSensor = ColorSensor(COLOR_SENSOR_PORT)
         self.colorSensor2 = ColorSensor(COLOR_SENSOR_PORT_2)
 
-
-
-
-    def moveLeftAttachmentMotorForMillis(
-        self,
-        millis,
-        speed,
-    ):
+    def moveLeftAttachmentMotorForMillis(self, millis, speed):
         self.leftAttachmentMotor.run_time(speed, millis)
 
     def moveRightAttachmentMotorForMillis(
         self,
         millis,
         speed,
+        wait=True,
     ):
-        self.rightAttachmentMotor.run_time(speed, millis)
+        self.rightAttachmentMotor.run_time(speed, millis, wait=wait)
 
     def moveLeftAttachmentMotorForDeg(
         self,
         degrees,
         speed,
     ):
-        self.leftAttachmentMotor.run_angle(speed, degrees, then=Stop.BRAKE, wait=True)
+        self.leftAttachmentMotor.run_angle(
+            speed, degrees, then=Stop.BRAKE, wait=True
+        )
 
     def moveRightAttachmentMotorForDeg(
         self,
         degrees,
         speed,
     ):
-        self.rightAttachmentMotor.run_angle(speed, degrees, then=Stop.BRAKE, wait=True)
-
-    def driveForDistance(
-        self,
-        distance,
-        speed,
-        then=Stop.BRAKE,
-        gyro=True,
-    ):
-        self.robot.use_gyro(gyro)
-        self.robot.settings(
-            straight_speed=speed,
-            straight_acceleration=500
+        self.rightAttachmentMotor.run_angle(
+            speed, degrees, then=Stop.BRAKE, wait=True
         )
-        self.robot.straight(distance, then, wait)
+
+    def driveForDistance(self, distance, speed, then=Stop.BRAKE, gyro=True):
+        self.robot.use_gyro(gyro)
+        self.robot.settings(straight_speed=speed, straight_acceleration=500)
+        self.robot.straight(distance, then=then)
 
     def turn(
         self,
@@ -106,7 +98,7 @@ class BaseRobot:
     ):
         self.robot.use_gyro(gyro)
         self.robot.settings(turn_rate=speed, turn_acceleration=500)
-        self.robot.turn(angle, then, wait)
+        self.robot.turn(angle, then)
 
     def lightOn(
         self,
@@ -123,9 +115,7 @@ class BaseRobot:
     ):
         wait(time)
 
-    def lightOff(
-        self
-    ):
+    def lightOff(self):
         self.hub.light.off()
 
     def beep(
@@ -140,7 +130,7 @@ class BaseRobot:
         angle=0,
     ):
         self.robot.reset_heading(angle)
-        
+
     def curve(
         self,
         radius,
@@ -152,9 +142,7 @@ class BaseRobot:
         self.robot.use_gyro(gyro)
         self.robot.settings(turn_rate=speed, turn_acceleration=500)
         self.robot.drive(speed, 0)
-        self.robot.curve(radius, angle, then, wait)
-
-
+        self.robot.curve(radius, angle, then)
 
 
 if __name__ == "__main__":
