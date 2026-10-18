@@ -55,16 +55,19 @@ class BaseRobot:
         self.colorSensor = ColorSensor(COLOR_SENSOR_PORT)
         self.colorSensor2 = ColorSensor(COLOR_SENSOR_PORT_2)
 
-    def moveLeftAttachmentMotorForMillis(self, millis, speed, wait=True):
-        self.leftAttachmentMotor.run_time(speed, millis, wait=wait)
+    def moveLeftAttachmentMotorForMillis(
+        self, millis, speed, wait=True, then=Stop.BRAKE
+    ):
+        self.leftAttachmentMotor.run_time(speed, millis, wait=wait, then=then)
 
     def moveRightAttachmentMotorForMillis(
         self,
         millis,
         speed,
         wait=True,
+        then=Stop.BRAKE,
     ):
-        self.rightAttachmentMotor.run_time(speed, millis, wait=wait)
+        self.rightAttachmentMotor.run_time(speed, millis, wait=wait, then=then)
 
     def rightMotorALLUP(
         self,
@@ -106,7 +109,9 @@ class BaseRobot:
 
     def driveForDistance(self, distance, speed, then=Stop.BRAKE, gyro=True):
         self.robot.use_gyro(gyro)
-        self.robot.settings(straight_speed=speed, straight_acceleration=500)
+        self.robot.settings(
+            straight_speed=speed, straight_acceleration=(600, 150)
+        )
         self.robot.straight(distance, then=then)
 
     def turn(
