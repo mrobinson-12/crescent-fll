@@ -22,14 +22,14 @@ from pybricks.tools import wait
 from pybricks import version
 
 # THESE MUST BE CHANGED TO MATCH YOUR ROBOT'S CONFIGURATION
-TIRE_DIAMETER = 87  # mm
-AXLE_TRACK = 161  # distance between the wheels, mm
-COLOR_SENSOR_PORT = Port.C
-COLOR_SENSOR_PORT_2 = Port.B
-LEFT_DRIVE_MOTOR_PORT = Port.A
-RIGHT_DRIVE_MOTOR_PORT = Port.E
-LEFT_ATTACHMENT_MOTOR_PORT = Port.F
-RIGHT_ATTACHMENT_MOTOR_PORT = Port.D
+TIRE_DIAMETER = 56  # mm
+AXLE_TRACK = 167  # distance between the wheels, mm
+COLOR_SENSOR_PORT = Port.D
+COLOR_SENSOR_PORT_2 = Port.F
+LEFT_DRIVE_MOTOR_PORT = Port.C
+RIGHT_DRIVE_MOTOR_PORT = Port.B
+LEFT_ATTACHMENT_MOTOR_PORT = Port.A
+RIGHT_ATTACHMENT_MOTOR_PORT = Port.E
 
 
 class BaseRobot:
@@ -55,8 +55,8 @@ class BaseRobot:
         self.colorSensor = ColorSensor(COLOR_SENSOR_PORT)
         self.colorSensor2 = ColorSensor(COLOR_SENSOR_PORT_2)
 
-    def moveLeftAttachmentMotorForMillis(self, millis, speed):
-        self.leftAttachmentMotor.run_time(speed, millis)
+    def moveLeftAttachmentMotorForMillis(self, millis, speed, wait=True):
+        self.leftAttachmentMotor.run_time(speed, millis, wait=wait)
 
     def moveRightAttachmentMotorForMillis(
         self,
