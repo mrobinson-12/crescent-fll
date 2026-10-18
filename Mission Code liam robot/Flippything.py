@@ -2,38 +2,23 @@ from base_robot import *
 
 
 def Run(br: BaseRobot):
-    for i in range(10):
-        br.moveRightAttachmentMotorForMillis(millis=2000, speed=100)
+    br.leftAttachmentMotor.run_until_stalled(
+        100, then=Stop.HOLD, duty_limit=30
+    )
 
-        br.driveForDistance(
-            distance=370, speed=100, then=Stop.BRAKE, gyro=True
-        )
+    br.moveLeftAttachmentMotorForMillis(millis=3000, speed=-130)
+    br.driveForDistance(distance=290, speed=100, then=Stop.HOLD, gyro=True)
 
-        br.moveRightAttachmentMotorForMillis(millis=1000, speed=-200)
+    br.moveLeftAttachmentMotorForMillis(millis=1150, speed=200, then=Stop.HOLD)
+    br.leftAttachmentMotor.control.limits(800, 1000, 1000)
+    # Start attachment WITHOUT waiting
+    br.moveLeftAttachmentMotorForMillis(
+        millis=2000, speed=800, wait=False, then=Stop.HOLD
+    )
 
-        # Start attachment WITHOUT waiting
-        br.moveRightAttachmentMotorForMillis(
-            millis=1000, speed=-500, wait=False
-        )
-
-        # Drive while attachment is moving
-        br.driveForDistance(
-            distance=-90, speed=1000, then=Stop.BRAKE, gyro=True
-        )
-        br.moveRightAttachmentMotorForMillis(millis=2000, speed=200)
-        br.driveForDistance(distance=90, speed=100, then=Stop.BRAKE, gyro=True)
-        br.moveRightAttachmentMotorForMillis(millis=1700, speed=-200)
-
-        # Start attachment WITHOUT waiting
-        br.moveRightAttachmentMotorForMillis(
-            millis=1000, speed=-200, wait=False
-        )
-
-        # Drive while attachment is moving
-        br.driveForDistance(
-            distance=-410, speed=500, then=Stop.BRAKE, gyro=True
-        )
-        br.wait(1000)
+    # Drive while attachment is moving
+    br.driveForDistance(distance=-80, speed=800, then=Stop.BRAKE, gyro=True)
+    # br.driveForDistance(distance=-400, speed=100, then=Stop.BRAKE, gyro=True)
 
 
 if __name__ == "__main__":

@@ -6,14 +6,14 @@ from base_robot import *
 def Run(br: BaseRobot):
     br.driveForDistance(speed=100, distance=300, then=Stop.BRAKE, gyro=True)
     br.turn(angle=90, speed=100, then=Stop.BRAKE, gyro=True)
-    br.driveForDistance(speed=100, distance=300, then=Stop.BRAKE, gyro=True)
-    br.turn(angle=-90, speed=100, then=Stop.BRAKE, gyro=True)
-    br.driveForDistance(speed=100, distance=380, then=Stop.BRAKE, gyro=True)
-    br.turn(angle=90, speed=100, then=Stop.BRAKE, gyro=True)
     br.driveForDistance(speed=100, distance=280, then=Stop.BRAKE, gyro=True)
     br.turn(angle=-90, speed=100, then=Stop.BRAKE, gyro=True)
+    br.driveForDistance(speed=100, distance=270, then=Stop.BRAKE, gyro=True)
+    br.turn(angle=90, speed=100, then=Stop.BRAKE, gyro=True)
+    br.driveForDistance(speed=100, distance=250, then=Stop.BRAKE, gyro=True)
+    br.turn(angle=-90, speed=100, then=Stop.BRAKE, gyro=True)
     br.driveForDistance(speed=100, distance=160, then=Stop.BRAKE, gyro=True)
-    br.moveRightAttachmentMotorForMillis(millis=2000, speed=200, wait=False)
+    br.moveLeftAttachmentMotorForMillis(millis=2000, speed=-200, wait=True)
     br.driveForDistance(speed=100, distance=-200, then=Stop.BRAKE)
 
 
