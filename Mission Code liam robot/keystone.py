@@ -4,8 +4,8 @@ from base_robot import *
 
 # start all commands with br.
 def Run(br: BaseRobot):
-    br.leftAttachmentMotor.run_until_stalled(
-        100, then=Stop.COAST, duty_limit=26
+    br.moveLeftAttachmentMotorUntilStalled(
+        speed=100, then=Stop.COAST, duty_limit=26
     )
     br.wait(200)
     br.moveLeftAttachmentMotorForMillis(millis=1700, speed=-170)

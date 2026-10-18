@@ -69,6 +69,34 @@ class BaseRobot:
     ):
         self.rightAttachmentMotor.run_time(speed, millis, wait=wait, then=then)
 
+    def moveLeftAttachmentMotorUntilStalled(
+        self,
+        speed=100,
+        then=Stop.COAST,
+        duty_limit=26,
+    ):
+        """Run until stalled and return the angle, using Keystone's defaults.
+
+        Negative speed reverses direction. duty_limit is the power limit (%).
+        """
+        return self.leftAttachmentMotor.run_until_stalled(
+            speed, then=then, duty_limit=duty_limit
+        )
+
+    def moveRightAttachmentMotorUntilStalled(
+        self,
+        speed=100,
+        then=Stop.COAST,
+        duty_limit=26,
+    ):
+        """Run until stalled and return the angle, using Keystone's defaults.
+
+        Negative speed reverses direction. duty_limit is the power limit (%).
+        """
+        return self.rightAttachmentMotor.run_until_stalled(
+            speed, then=then, duty_limit=duty_limit
+        )
+
     def rightMotorALLUP(
         self,
         speed=300,
