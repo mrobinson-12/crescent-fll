@@ -169,6 +169,16 @@ class BaseRobot:
         self.robot.drive(speed, 0)
         self.robot.curve(radius, angle, then)
 
+    def getBatteryPercentage(self):
+        """Returns the estimated battery percentage (0-100%)."""
+        voltage_mv = self.hub.battery.voltage()
+        # Typical voltage range for the LEGO Prime Hub (6.4V empty to 8.2V full)
+        min_voltage = 6400
+        max_voltage = 8200
+
+        pct = (voltage_mv - min_voltage) / (max_voltage - min_voltage) * 100
+        return max(0, min(100, int(pct)))
+
 
 if __name__ == "__main__":
     print("Don't run the BaseRobot class file. Nothing to do here.")
