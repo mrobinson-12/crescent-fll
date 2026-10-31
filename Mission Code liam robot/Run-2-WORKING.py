@@ -11,24 +11,24 @@ def Run(br: BaseRobot):
     )
     br.driveForDistance(speed=100, distance=250, then=Stop.BRAKE, gyro=True)
     br.turn(angle=55, speed=100, then=Stop.BRAKE, gyro=True)
-    br.driveForDistance(speed=100, distance=675, then=Stop.BRAKE, gyro=True)
+    br.driveForDistance(speed=100, distance=685, then=Stop.BRAKE, gyro=True)
     br.turn(angle=-56, speed=100, then=Stop.BRAKE, gyro=True)
-    br.moveLeftAttachmentMotorForMillis(millis=2000, speed=-200, wait=False)
+    br.moveLeftAttachmentMotorForMillis(millis=2000, speed=-250, wait=False)
     br.driveForDistance(speed=380, distance=100, gyro=True)
     br.driveForDistance(speed=30, distance=20, gyro=True)
     wait(100)
     br.driveForDistance(speed=100, distance=-150, then=Stop.BRAKE)
-    br.moveLeftAttachmentMotorForMillis(millis=1000, speed=200, wait=True)
+    br.moveLeftAttachmentMotorForMillis(millis=1500, speed=200, wait=True)
     br.moveLeftAttachmentMotorForMillis(millis=2000, speed=-200, wait=False)
     # Ant
     br.turn(angle=45, speed=100, then=Stop.BRAKE, gyro=True)
-    br.driveForDistance(speed=100, distance=380, then=Stop.BRAKE, gyro=True)
+    br.driveForDistance(speed=100, distance=290, then=Stop.BRAKE, gyro=True)
     br.turn(angle=45, speed=100, then=Stop.BRAKE, gyro=True)
     drive_limits = br.robot.distance_control.limits()
     try:
         br.robot.distance_control.limits(torque=drive_limits[2] * 1.5)
         br.driveForDistance(
-            speed=100, distance=320, then=Stop.BRAKE, gyro=True
+            speed=100, distance=380, then=Stop.BRAKE, gyro=True
         )
     finally:
         br.robot.distance_control.limits(*drive_limits)
@@ -37,17 +37,18 @@ def Run(br: BaseRobot):
     drive_limits = br.robot.distance_control.limits()
     try:
         br.robot.distance_control.limits(torque=drive_limits[2] * 1.5)
-        br.driveForDistance(speed=50, distance=180, then=Stop.BRAKE, gyro=True)
+        br.driveForDistance(speed=50, distance=130, then=Stop.BRAKE, gyro=True)
     finally:
         br.robot.distance_control.limits(*drive_limits)
     # Reveal thing
-    br.driveForDistance(speed=100, distance=-110, then=Stop.BRAKE, gyro=True)
+    br.driveForDistance(speed=100, distance=-100, then=Stop.BRAKE, gyro=True)
     br.turn(angle=90, speed=100, then=Stop.BRAKE, gyro=True)
     br.driveForDistance(speed=100, distance=300, then=Stop.BRAKE, gyro=True)
+    br.driveForDistance(speed=100, distance=-50, then=Stop.BRAKE, gyro=True)
     br.turn(angle=-30, speed=100, then=Stop.BRAKE, gyro=True)
     br.driveForDistance(speed=100, distance=200, then=Stop.BRAKE, gyro=True)
     br.turn(angle=45, speed=100, then=Stop.BRAKE, gyro=True)
-    br.driveForDistance(speed=100, distance=300, then=Stop.BRAKE, gyro=True)
+    br.driveForDistance(speed=100, distance=350, then=Stop.BRAKE, gyro=True)
 
 
 # Ignore everything below this line. This just runs the mission.
