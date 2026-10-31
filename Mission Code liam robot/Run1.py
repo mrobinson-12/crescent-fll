@@ -41,27 +41,7 @@ def Run(br: BaseRobot):
 
     # Drive while attachment is moving
     br.driveForDistance(distance=-100, speed=900, then=Stop.BRAKE, gyro=True)
-    br.driveForDistance(distance=5300, speed=999, then=Stop.BRAKE, gyro=True)
-    # br.driveForDistance(distance=-400, speed=100, then=Stop.BRAKE, gyro=True)
-
-    br.turn(angle=90, speed=100, then=Stop.BRAKE, gyro=True)
-    br.wait(300)
-    # wait for user realignment
-    br.moveLeftAttachmentMotorForMillis(millis=2000, speed=-800, wait=True)
-    # move attatchment up
-    # Drone
-    br.driveForDistance(distance=350, speed=300, then=Stop.BRAKE, gyro=True)
-    br.turn(angle=-90, speed=100, then=Stop.BRAKE, gyro=True)
-    br.driveForDistance(distance=-20, speed=300, then=Stop.BRAKE, gyro=True)
-    br.turn(angle=90, speed=100, then=Stop.BRAKE, gyro=True)
-    br.driveForDistance(distance=-50, speed=300, then=Stop.BRAKE, gyro=True)
-    br.turn(angle=-40, speed=100, then=Stop.BRAKE, gyro=True)
-    br.driveForDistance(distance=50, speed=300, then=Stop.BRAKE, gyro=True)
-    br.turn(angle=40, speed=100, then=Stop.BRAKE, gyro=True)
-    br.driveForDistance(distance=350, speed=600, then=Stop.BRAKE, gyro=True)
-    br.driveForDistance(distance=-100, speed=300, then=Stop.BRAKE, gyro=True)
-    br.turn(angle=10, speed=100, then=Stop.BRAKE, gyro=True)
-    br.driveForDistance(distance=-500, speed=300, then=Stop.BRAKE, gyro=True)
+    br.driveForDistance(distance=-400, speed=600, then=Stop.BRAKE, gyro=True)
 
 
 if __name__ == "__main__":
