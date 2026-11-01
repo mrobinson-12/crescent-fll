@@ -2,7 +2,7 @@
 
 Left/right: choose a number. Middle: run that mission.
 While a mission is running, press middle to stop it and return to the menu.
-After the mission finishes, the menu comes back too.
+After finishing or stopping, the next number is selected (the last wraps to 1).
 
 To assign a different .py file:
 1. Keep it in this folder and give it a name without spaces or hyphens.
@@ -35,15 +35,18 @@ MISSIONS = {
 
 def main():
     br = BaseRobot()
+    # Use numeric order explicitly; the hub may not preserve dictionary order.
+    numbers = sorted(MISSIONS, key=int)
+    next_number = numbers[0]
 
     while True:
+        number = None
         try:
             # Let the middle button select a mission instead of stopping it.
             br.hub.system.set_stop_button(None)
-            # Reverse navigation while keeping the first mission as the starting choice.
-            choices = list(MISSIONS)
-            choices = choices[:1] + choices[:0:-1]
-            number = str(hub_menu(*choices))
+            # hub_menu starts on its first choice, so put the next number first.
+            start = numbers.index(next_number)
+            number = str(hub_menu(*(numbers[start:] + numbers[:start])))
             while br.hub.buttons.pressed():
                 wait(10)
             br.beep()
@@ -61,6 +64,9 @@ def main():
             br.robot.stop()
             br.leftAttachmentMotor.stop()
             br.rightAttachmentMotor.stop()
+
+        if number is not None:
+            next_number = numbers[(numbers.index(number) + 1) % len(numbers)]
 
         while br.hub.buttons.pressed():
             wait(10)

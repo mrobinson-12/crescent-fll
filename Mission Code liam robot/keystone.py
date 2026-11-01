@@ -14,7 +14,7 @@ def Run(br: BaseRobot):
     br.turn(angle=45, speed=300, then=Stop.COAST, gyro=True)
     br.wait(2500)
     br.moveLeftAttachmentMotorForMillis(millis=2000, speed=-200, wait=True)
-
+    br.turn(angle=-45, speed=300, then=Stop.COAST, gyro=True)
     br.driveForDistance(speed=100, distance=-500, then=Stop.BRAKE, gyro=True)
 
 
