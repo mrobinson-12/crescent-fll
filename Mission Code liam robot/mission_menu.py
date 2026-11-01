@@ -21,15 +21,17 @@ from pybricks.parameters import Button
 from base_robot import BaseRobot
 import Run1
 import Run2
+import drone
 import keystone
 import BIGFUNGUS
 
 # CHANGE THESE ASSIGNMENTS to choose which .py file each number runs.
 MISSIONS = {
     "1": Run1.Run,
-    "2": Run2.Run,
-    "3": keystone.Run,
-    "4": BIGFUNGUS.Run,
+    "2": drone.Run,
+    "3": Run2.Run,
+    "4": keystone.Run,
+    "5": BIGFUNGUS.Run,
 }
 
 
