@@ -10,7 +10,7 @@
         "**/.vscode/": true,
         "**/__pycache__/": true,
         "**/.gitignore": true,
-        "**/README.md": true,
+        "**/README.md": false,
         "*.code-profile": true,
         "base_robot*.py": false,
         "requirements.txt": true,

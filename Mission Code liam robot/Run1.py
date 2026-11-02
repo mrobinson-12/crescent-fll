@@ -1,14 +1,12 @@
 from base_robot import *
 
-# Not accurate enough yet and needs manual intervention - to fix but works
-
 
 def Run(br: BaseRobot):
     br.leftAttachmentMotor.run_until_stalled(
         250, then=Stop.HOLD, duty_limit=26
     )
     br.moveLeftAttachmentMotorForMillis(millis=600, speed=-200)
-    br.moveLeftAttachmentMotorForMillis(millis=1200, wait=False, speed=-190)
+    br.moveLeftAttachmentMotorForMillis(millis=1200, wait=False, speed=-215)
     # resets attatchment to up
     br.driveForDistance(distance=285, speed=250, then=Stop.HOLD, gyro=True)
     # drives to mission
