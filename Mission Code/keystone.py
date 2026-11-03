@@ -4,6 +4,7 @@ from base_robot import *
 
 # start all commands with br.
 def Run(br: BaseRobot):
+    # does all the keystoney stuff
     br.moveLeftAttachmentMotorUntilStalled(
         speed=250, then=Stop.COAST, duty_limit=26
     )

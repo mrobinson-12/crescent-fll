@@ -1,19 +1,5 @@
-"""Run this file on Liam's robot to choose a mission with the hub buttons.
+# AI generated - im sowwy i just too dumb to make myself
 
-Left/right: choose a number. Middle: run that mission.
-While a mission is running, press middle to stop it and return to the menu.
-After finishing or stopping, the next number is selected (the last wraps to 1).
-
-To assign a different .py file:
-1. Keep it in this folder and give it a name without spaces or hyphens.
-   For example, rename "drone working.py" to "drone_working.py".
-2. Add an import below, e.g. import drone_working (leave off .py).
-3. Set a number below to its Run function, e.g. "1": drone_working.Run.
-4. Download/run this menu again so your changes reach the hub.
-
-Each mission needs def Run(br), just like the existing mission files.
-Use single digits 1-9 so each choice fits on the hub display.
-"""
 
 from pybricks.tools import hub_menu, wait
 from pybricks.parameters import Button
