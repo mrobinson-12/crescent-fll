@@ -17,17 +17,17 @@ def Run(br: BaseRobot):
     br.moveLeftAttachmentMotorForMillis(millis=500, speed=300)
     # Moving across to mine dock thing
     br.moveLeftAttachmentMotorUntilStalled(
-        speed=250, then=Stop.COAST, duty_limit=26
+        speed=250, then=Stop.HOLD, duty_limit=26
     )
     # Compost
     br.moveLeftAttachmentMotorForMillis(millis=610, speed=-210)
     br.moveLeftAttachmentMotorForMillis(millis=575, speed=-250)
     br.driveForDistance(speed=150, distance=186, then=Stop.BRAKE, gyro=True)
     br.moveLeftAttachmentMotorUntilStalled(
-        speed=250, then=Stop.COAST, duty_limit=26
+        speed=250, then=Stop.HOLD, duty_limit=26
     )
     # Roof
-    br.moveLeftAttachmentMotorForMillis(millis=600, speed=-200)
+    br.moveLeftAttachmentMotorForMillis(millis=600, speed=-220)
     br.driveForDistance(speed=100, distance=-22, then=Stop.BRAKE, gyro=True)
     br.turn(angle=-5, speed=100, then=Stop.BRAKE, gyro=True)
     br.moveLeftAttachmentMotorForMillis(millis=1000, speed=-248)
